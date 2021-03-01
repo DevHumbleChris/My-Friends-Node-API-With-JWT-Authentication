@@ -3,6 +3,8 @@ const bcrypt = require("bcryptjs")
 const User = require("../models/User")
 const validate = require("../validate")
 const jwt = require("jsonwebtoken")
+const Friend = require("../models/Friend")
+
 
 module.exports = {
 
@@ -60,7 +62,79 @@ module.exports = {
     },
 
     // @ Friends API.
-    getAllFriends: (req, res) => {
+    getAllFriends: async (req, res) => {
 
+        // @ Get All Friends.         
+        try{
+            const allFriends = await Friend.find().select("name location")
+            res.json({
+                Friends: allFriends
+            })
+        }catch(err){
+            res.status(400).json({
+                error: "400: Bad Request",
+                message: err.message
+            })
+        }
+    },
+    newFriend: async (req, res) => {
+        
+        // @ Validate Inputs. 
+        const { error } = validate.newFriendValidate(req.body)
+        if(error) return res.status(400).json({
+            error: "400: Bad Request",
+            message: error.message
+        })
+
+        // @ Check If Friend Exists. 
+        const friendExists = await Friend.findOne({ name: req.body.name})
+        if(friendExists) return res.status(400).json({
+            error: "400: bad Request",
+            message: "Friend Exists In The Database"
+        })
+
+        // @ New Friend. 
+        const friend = new Friend({
+            name: req.body.name,
+            location: req.body.location,
+            phoneNumber: req.body.phoneNumber,
+            aboutFriend: req.body.aboutFriend,
+            status: req.body.status
+        })
+
+        try{
+            const newFriend = await friend.save()
+            res.send(newFriend)
+        }catch(err){
+            res.status(400).send(err.message)
+        }
+    },
+    updateFriend: async (req, res) => {
+        const ID = req.params.id
+
+        // @ Update Friend By Id. 
+        try{
+            const updatedData = await Friend.findByIdAndUpdate({_id: ID}, { $set: req.body})
+            res.json(updatedData)
+        }catch(err){
+            res.status(400).json({
+                error: "400: Bad Request",
+                message: err.message
+            })
+        } 
+    },
+
+    // @ Error Handling. 
+    error404: (req, res, next) => {
+        res.status(404).json({
+            error: "404: Page Not Found",
+            message: "Page You're Requesting Seems Not To Exists in The Friends-API"
+        })
+    },
+    error500: (err, req, res, next) => {
+        res.status(500).json({
+            error: "500: Internal Server Error",
+            message: "Sever Seems To be Unresponsive, please try refresh the page. If Still you keep getting this error please email: christopherodhiambo254@gmail.com"
+        })
     }
 }

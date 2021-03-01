@@ -19,5 +19,17 @@ module.exports = {
         })
 
         return loginValidateSchema.validate(data);
+    },
+    newFriendValidate: (data) => {
+
+        const newFriendValidateSchema = Joi.object({
+            name: Joi.string().max(255).required(),
+            location: Joi.string().max(30).required(),
+            phoneNumber: Joi.string().max(13).min(10).required(),
+            aboutFriend: Joi.string().min(30).required(),
+            status: Joi.string().max(50).required()
+        })
+
+        return newFriendValidateSchema.validate(data);
     }
 }

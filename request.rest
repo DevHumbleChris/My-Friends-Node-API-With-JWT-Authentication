@@ -1,0 +1,21 @@
+GET http://127.0.0.1:3000/api/friend/all
+
+###
+POST http://127.0.0.1:3000/api/friend/new
+Content-Type: application/json
+
+{
+    "name": "Christopher Oloo",
+    "location": "Bangladesh, Mombasa",
+    "phoneNumber": "0702337505",
+    "aboutFriend": "That One friend always coming to the rescue, coding buddy, mentor, brother in the eyes of the Lord.",
+    "status": "Best Friend"
+}
+
+###
+PUT http://127.0.0.1:3000/api/friend/update/603ca24496512c780668eb
+Content-Type: application/json
+
+{
+    "location": "Likoni, Mombasa"
+}

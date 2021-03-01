@@ -14,7 +14,7 @@ const friendSchema = new mongoose.Schema({
     phoneNumber: {
         type: String,
         required: true,
-        max: 10
+        max: 13
     },
     aboutFriend: {
         type: String,
