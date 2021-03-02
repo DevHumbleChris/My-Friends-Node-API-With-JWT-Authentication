@@ -1,3 +1,25 @@
+
+###
+POST http://127.0.0.1:3000/api/user/login
+Content-Type: application/json
+
+{
+    "email": "christopherodhiambo254@gmail.com",
+    "password": "montana254"
+}
+
+###
+
+POST http://127.0.0.1:3000/api/user/register
+Content-Type: application/json
+
+{
+    "name": "Christopher Odhiambo",
+    "email": "christopherodhiambo254@gmail.com",
+    "password": "montana254"
+}
+
+###
 GET http://127.0.0.1:3000/api/friend/all
 
 ###
@@ -5,11 +27,11 @@ POST http://127.0.0.1:3000/api/friend/new
 Content-Type: application/json
 
 {
-    "name": "Christopher Oloo",
-    "location": "Bangladesh, Mombasa",
-    "phoneNumber": "0702337505",
-    "aboutFriend": "That One friend always coming to the rescue, coding buddy, mentor, brother in the eyes of the Lord.",
-    "status": "Best Friend"
+    "name": "Godwin Odongo",
+    "location": "Likoni, Mombasa",
+    "phoneNumber": "07175779788",
+    "aboutFriend": "The Friendly Attachment Supervisor, coding buddy and networking helper. Very Humble",
+    "status": "Friend"
 }
 
 ###
@@ -19,3 +41,9 @@ Content-Type: application/json
 {
     "location": "Likoni, Mombasa"
 }
+
+###
+DELETE http://127.0.0.1:3000/api/friend/remove/603ca2444b96512c7806
+
+###
+GET http://127.0.0.1:3000/api/friend/info/603ca2444b96512c7806

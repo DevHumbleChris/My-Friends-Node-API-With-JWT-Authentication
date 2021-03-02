@@ -1,6 +1,7 @@
 require("dotenv/config")
 const express = require("express")
 const mongoose = require("mongoose")
+const token = require("./authenticate")
 const mainControllers = require("./controllers/mainControllers")
 const authRoute = require("./routes/auth")
 const friendsRoute = require("./routes/friends")

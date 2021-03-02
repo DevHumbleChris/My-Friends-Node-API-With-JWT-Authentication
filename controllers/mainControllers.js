@@ -123,6 +123,38 @@ module.exports = {
             })
         } 
     },
+    deleteFriend: async (req, res) =>{
+        const ID = req.params.id
+
+        try{
+            // @ Delete Friend From The Database. 
+            const deletedFriend = await Friend.findByIdAndRemove({ _id: ID})
+            res.json({
+                deletedFriendData: deletedFriend
+            })
+        }catch(err){
+            res.status(400).json({
+                error: "400: Bad Request",
+                message: err.message
+            })
+        }
+    },
+    getFriendInfo: async (req, res) => {
+        const ID = req.params.id
+
+        try{
+            // @ Get Friend Info By ID. 
+            const results = await Friend.findById({ _id: ID })
+            res.json({
+                results,
+            })
+        }catch(err){
+            res.status(400).json({
+                error: "400: Bad Request",
+                message: err.message
+            })
+        }
+    },
 
     // @ Error Handling. 
     error404: (req, res, next) => {
